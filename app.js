@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const pool = require('./db'); // Importing the pool from db.js
 
 const validateVictimData = require('./middlewares/validateVictimData'); // Import the validation middleware
-
+const validateIncident = require("./middlewares/incidentValidation");
 
 const app = express();
 const port = 3000;
@@ -40,7 +40,7 @@ app.post('/victims', validateVictimData, async (req, res) => {
 // Add a new incident
 //victim can add an incident only when he or she is first registered .. 
 
-app.post('/incidents', async (req, res) => {
+app.post('/incidents', validateIncident, async (req, res) => {
     const {
         victim_id,
         description,
