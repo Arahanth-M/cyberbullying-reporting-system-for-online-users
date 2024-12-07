@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const validateIncident = require('../middlewares/incidentValidation');
-const pool = require('../db'); // Import your database pool
+const pool = require('../middlewares/database/db'); // Import your database pool
 
 // POST route for creating an incident
 router.post('/', validateIncident, async (req, res) => {

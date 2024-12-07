@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const pool = require('./db'); // Importing the pool from db.js
+const pool = require('./middlewares/database/db.js'); // Importing the pool from db.js
 
 const victimRoute = require("./routes/victims");
 const incidentRoute = require("./routes/incidents");
