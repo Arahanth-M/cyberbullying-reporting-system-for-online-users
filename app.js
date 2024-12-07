@@ -2,88 +2,26 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const pool = require('./db'); // Importing the pool from db.js
 
-const validateVictimData = require('./middlewares/validateVictimData'); // Import the validation middleware
-const validateIncident = require("./middlewares/incidentValidation");
-
+const victimRoute = require("./routes/victims");
+const incidentRoute = require("./routes/incidents");
+const responderRoute = require("./routes/responders");
+const counsellorRoute = require("./routes/counsellors");
+const victimCounsellorRoute = require("./routes/Vic_Couns.js");
 const app = express();
 const port = 3000;
 
 app.use(bodyParser.json());
 
-// API routes for inserting data into the tables
+app.use("/victims", victimRoute);
+app.use("/incidents", incidentRoute);
+app.use("/responders", responderRoute);
+app.use("/counsellors", counsellorRoute);
+app.use("/victim-counsellors", victimCounsellorRoute);
 
-// Add a new victim
-app.post('/victims', validateVictimData, async (req, res) => {
-    const {
-        name,
-        email,
-        age,
-        gender,
-        contact_info
-    } = req.body;
-    try {
-        const [result] = await pool.query(
-            'INSERT INTO Victim (name, email, age, gender, contact_info) VALUES (?, ?, ?, ?, ?)',
-            [name, email, age, gender, contact_info]
-        );
-        res.status(201).json({
-            message: 'Victim created',
-            victimId: result.insertId
-        });
-    } catch (error) {
-        res.status(500).json({
-            error: error.message
-        });
-    }
-});
 
-// Add a new incident
-//victim can add an incident only when he or she is first registered .. 
 
-app.post('/incidents', validateIncident, async (req, res) => {
-    const {
-        victim_id,
-        description,
-        status
-    } = req.body;
-    try {
-        const [result] = await pool.query(
-            'INSERT INTO Incident (victim_id, description, status) VALUES (?, ?, ?)',
-            [victim_id, description, status]
-        );
-        res.status(201).json({
-            message: 'Incident created',
-            incidentId: result.insertId
-        });
-    } catch (error) {
-        res.status(500).json({
-            error: error.message
-        });
-    }
-});
 
-// Add a new responder
-app.post('/responders', async (req, res) => {
-    const {
-        name,
-        role,
-        contact_info
-    } = req.body;
-    try {
-        const [result] = await pool.query(
-            'INSERT INTO Responder (name, role, contact_info) VALUES (?, ?, ?)',
-            [name, role, contact_info]
-        );
-        res.status(201).json({
-            message: 'Responder created',
-            responderId: result.insertId
-        });
-    } catch (error) {
-        res.status(500).json({
-            error: error.message
-        });
-    }
-});
+
 
 // Add an action taken by a responder for an incident
 app.post('/actions', async (req, res) => {
@@ -109,27 +47,7 @@ app.post('/actions', async (req, res) => {
 });
 
 // Add a new counsellor
-app.post('/counsellors', async (req, res) => {
-    const {
-        name,
-        contact_info,
-        area_of_expertise
-    } = req.body;
-    try {
-        const [result] = await pool.query(
-            'INSERT INTO Counsellor (name, contact_info, area_of_expertise) VALUES (?, ?, ?)',
-            [name, contact_info, area_of_expertise]
-        );
-        res.status(201).json({
-            message: 'Counsellor created',
-            counsellorId: result.insertId
-        });
-    } catch (error) {
-        res.status(500).json({
-            error: error.message
-        });
-    }
-});
+
 
 // Link a victim to a counsellor
 app.post('/victim-counsellor', async (req, res) => {
