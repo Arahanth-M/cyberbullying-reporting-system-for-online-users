@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../middlewares/database/db');
 
-router.post('/victimCounsellors', async (req, res) => {
+router.post('/', async (req, res) => {
     const {
         victim_id,
         counsellor_id

@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const pool = require('./database/db.js'); // Importing the pool from db.js
 const cors = require("cors")
 const victimRoute = require("./routes/victims");
 const incidentRoute = require("./routes/incidents");
