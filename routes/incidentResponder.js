@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../middlewares/database/db');
+const pool = require('../database/db');
 
-router.post('/incident-responder', async (req, res) => {
+router.post('/incidentResponder', async (req, res) => {
     const {
         incident_id,
         responder_id

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../middlewares/database/db');
+const pool = require('../database/db');
 
 router.post('/actions', async (req, res) => {
     const {

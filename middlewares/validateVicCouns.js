@@ -1,4 +1,4 @@
-const pool = require('./database/db'); // Import the database pool
+const pool = require('../database/db'); // Import the database pool
 
 async function validateVictimCounsellor(req, res, next) {
     const {

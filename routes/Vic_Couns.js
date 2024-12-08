@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../middlewares/database/db'); // Import the database pool
+const pool = require('../database/db'); // Import the database pool
 const validateVictimCounsellor = require('../middlewares/validateVicCouns'); // Import validation middleware
 
 // POST route for linking a victim to a counselor

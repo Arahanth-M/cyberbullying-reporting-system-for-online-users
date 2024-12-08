@@ -1,7 +1,7 @@
 // routes/victims.js
 const express = require('express');
 const router = express.Router();
-const pool = require('../middlewares/database/db'); // Import your database pool
+const pool = require('../database/db'); // Import your database pool
 const validateVictimData = require('../middlewares/validateVictimData'); // Import the validation middleware
 
 // POST route for adding a new victim
