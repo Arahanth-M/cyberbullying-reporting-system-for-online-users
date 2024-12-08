@@ -5,7 +5,7 @@ const validateIncident = require('../middlewares/incidentValidation');
 const pool = require('../middlewares/database/db'); // Import your database pool
 
 // POST route for creating an incident
-router.post('/', validateIncident, async (req, res) => {
+router.post('/incidents', validateIncident, async (req, res) => {
     const {
         victim_id,
         description,
